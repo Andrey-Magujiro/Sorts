@@ -24,13 +24,6 @@ int whriteToFile()
 		if (i % 20 == 0 && i != 0) { inOut << arr[i - 1] << endl; }
 	}
 
-	try {}
-	catch (int a)
-	{
-		cout << "file is not opening!!!" << endl;
-		return 0;
-	}
-
 	inOut.close();
 	delete[] arr;
 }
@@ -38,14 +31,18 @@ int whriteToFile()
 
 int setArrFromFile(std::vector<int> &arr)
 {
-	whriteToFile();
+	try { whriteToFile(); }
+	catch (int a)
+	{
+		cout << "file is not opening!!!" << endl;
+		return 0;
+	}
 	ifstream in("D:\\c++\\inOutFile.txt", ios::in);
 	if (!in.is_open()) { throw - 1; }
 	int buff;
 	int i = 1;
 	do {
 		in >> buff;
-		//cout << "arr:\t " << buff << "  tellg: " << in.tellg() << " i:" << i << endl;
 		arr.push_back(buff);
 		i++;
 	} while (!in.eof());

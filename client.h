@@ -9,7 +9,7 @@
 #include "setArrFromFile.h"
 
 
-void Client()
+int Client()
 {
 	vector<int> arr = {};
 	int actionOne;
@@ -17,7 +17,16 @@ void Client()
 		cout << "1- set array from consol,  2- set array from file" << endl;
 		cin >> actionOne;
 		if (actionOne == 1) { setArr(arr); break; }
-		else if (actionOne == 2) { setArrFromFile(arr); break; }
+		else if (actionOne == 2)
+		{
+			try { setArrFromFile(arr); }
+			catch (int a)
+			{
+				cout << "file is not opening!!!" << endl;
+				return 0;
+			}
+			break; 
+		}
 	} while (actionOne > 2 || actionOne <= 0);
 
 	const vector<int> constArr = arr;
